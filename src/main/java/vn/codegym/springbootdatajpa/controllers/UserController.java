@@ -32,8 +32,6 @@ public class UserController {
         return "index";
     }
 
-
-
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
         return "add-user";
@@ -42,14 +40,25 @@ public class UserController {
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            result.getFieldErrors();
             return "add-user";
         }
-        userDao.save(user);
-//        userRepository.save(user);
+        userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
         return "index";
     }
-    
+
+    private boolean validateUser(@Valid User user, Model model) {
+        String name = user.getName();
+        if (name.length() < 3 || name.length() > 10) {
+            model.addAttribute("errMessage", "Error message here");
+            return false;
+        }
+
+        String email = user.getEmail();
+        return true;
+    }
+
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));

@@ -12,7 +12,7 @@ public class ProductController {
     @Autowired ProductDaoService productDaoService;
     @Autowired ProductRepository productRepository;
 
-    @GetMapping("/product")
+    @GetMapping("/products")
     public String show(Model model){
         model.addAttribute("products", productRepository.findAll());
         return "list-product";

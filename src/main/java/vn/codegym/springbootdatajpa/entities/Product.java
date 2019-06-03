@@ -1,7 +1,5 @@
 package vn.codegym.springbootdatajpa.entities;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 

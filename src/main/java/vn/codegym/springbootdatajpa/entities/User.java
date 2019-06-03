@@ -1,5 +1,8 @@
 package vn.codegym.springbootdatajpa.entities;
 
+import org.hibernate.validator.constraints.UniqueElements;
+import vn.codegym.springbootdatajpa.validation.annotation.UniqueUserEmail;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -10,16 +13,19 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @NotBlank(message = "Name is mandatory")
     private String name;
     
-    @NotBlank(message = "Email is mandatory")
+    @NotBlank(message = "Email is mandatory")// validate email is not blank
+//    @UniqueUserEmail(message = "Email is already existence")
     private String email;
 
     @OneToMany
     List<Product> products;
 
     public User() {}
+
 
     public User(String name, String email) {
         this.name = name;
@@ -28,7 +34,6 @@ public class User {
     public void setId(long id) {
         this.id = id;
     }
-    
     public long getId() {
         return id;
     }
