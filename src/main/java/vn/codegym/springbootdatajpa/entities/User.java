@@ -1,6 +1,5 @@
 package vn.codegym.springbootdatajpa.entities;
 
-import org.hibernate.validator.constraints.UniqueElements;
 import vn.codegym.springbootdatajpa.validation.annotation.UniqueUserEmail;
 
 import javax.persistence.*;
@@ -18,7 +17,7 @@ public class User {
     private String name;
     
     @NotBlank(message = "Email is mandatory")// validate email is not blank
-//    @UniqueUserEmail(message = "Email is already existence")
+    @UniqueUserEmail(message = "Email is already existence")
     private String email;
 
     @OneToMany
