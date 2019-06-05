@@ -1,4 +1,4 @@
-package vn.codegym.springbootdatajpa.validation;
+package vn.codegym.springbootdatajpa.validation.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import vn.codegym.springbootdatajpa.entities.User;

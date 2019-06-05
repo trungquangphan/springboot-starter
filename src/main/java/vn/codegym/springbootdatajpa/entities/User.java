@@ -1,5 +1,6 @@
 package vn.codegym.springbootdatajpa.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import vn.codegym.springbootdatajpa.validation.annotation.UniqueUserEmail;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class User {
     private String email;
 
     @OneToMany
+    @JsonIgnore
     List<Product> products;
 
     public User() {}

@@ -1,6 +1,6 @@
 package vn.codegym.springbootdatajpa.validation.annotation;
 
-import vn.codegym.springbootdatajpa.validation.CheckEmailCustomerUnique;
+import vn.codegym.springbootdatajpa.validation.validator.CheckEmailCustomerUnique;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,20 +1,23 @@
 package vn.codegym.springbootdatajpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import vn.codegym.springbootdatajpa.dao.Dao;
 import vn.codegym.springbootdatajpa.entities.User;
 import vn.codegym.springbootdatajpa.repositories.UserRepository;
+import vn.codegym.springbootdatajpa.utils.JsonUtil;
 
 import javax.validation.Valid;
+import java.util.Locale;
 
 @Controller
 public class UserController {
+
+    @Autowired MessageSource messageSource;
 
     private final UserRepository userRepository;
     @Autowired
@@ -27,9 +30,26 @@ public class UserController {
 
 
     @GetMapping("")
-    public String homepage(Model model) {
+    public String getUsers(Model model) {
+//        String text = messageSource.getMessage("greeting",new String[]{"Codegym"}, Locale.forLanguageTag("hghg"));
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("name", "Trinh");
+        model.addAttribute("name2", "Nhut");
         return "index";
+    }
+
+    @GetMapping("/users")
+    @ResponseBody
+    public Iterable<User> getUsers() {
+        Iterable<User> users = userRepository.findAll();
+        return users;
+    }
+
+    @PutMapping("/users")
+    @ResponseBody
+    public Iterable<User> editUser(@RequestBody @Valid User user) {
+        userRepository.save(user);
+        return userRepository.findAll();
     }
 
     @GetMapping("/signup")
